@@ -1,24 +1,28 @@
+'''
+https://leetcode.com/problems/longest-substring-without-repeating-characters/
+'''
+
 # beats 99%
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        return_ = 0
+        char_map = {}
+        result = 0
+        left = 0
 
-        for elem_index in range(0, len(s)):
-            stack_string = []
+        for right, char in enumerate(s):
 
-            for letter in s[elem_index:]:
-                
-                if not letter in stack_string:
-                    stack_string.append(letter)
-            
-                else:
-                    break
+            if char in char_map and char_map[char] >= left:
+                left = char_map[char] + 1
 
-            if len(stack_string) > return_:
-                return_ = len(stack_string)
+            char_map[char] = right
 
-        return return_
+            current_len = right - left + 1
+
+            if current_len > result:
+                result = current_len
+        
+        return result
 
 print(Solution().lengthOfLongestSubstring("abcabcbb")) # -> 3
 print(Solution().lengthOfLongestSubstring("bbbbb")) # -> 1
