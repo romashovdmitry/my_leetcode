@@ -17,9 +17,7 @@ class Solution:
 
             char_map[char] = right
 
-            current_len = right - left + 1
-
-            if current_len > result:
+            if (current_len := right - left + 1) > result:
                 result = current_len
         
         return result
